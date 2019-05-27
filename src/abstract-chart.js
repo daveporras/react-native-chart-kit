@@ -42,7 +42,7 @@ class AbstractChart extends Component {
   renderHorizontalLines = config => {
     const {count, width, height, paddingTop, paddingRight, withoutDashes} = config
     return [...new Array(count)].map((_, i) => {
-      if (i === count - 1) return (
+      if (withoutDashes && i === count - 1) return (
         <Line
           key={Math.random()}
           x1={paddingRight}
