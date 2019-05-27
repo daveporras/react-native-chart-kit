@@ -40,9 +40,9 @@ class AbstractChart extends Component {
   }
 
   renderHorizontalLines = config => {
-    const {count, width, height, paddingTop, paddingRight} = config
+    const {count, width, height, paddingTop, paddingRight, withoutDashes} = config
     return [...new Array(count)].map((_, i) => {
-      return (
+      if (i === count - 1) return (
         <Line
           key={Math.random()}
           x1={paddingRight}
@@ -50,10 +50,11 @@ class AbstractChart extends Component {
           x2={width}
           y2={(height / 4) * i + paddingTop}
           stroke={this.props.chartConfig.color(0.2)}
-          strokeDasharray="5, 10"
+          strokeDasharray={withoutDashes ? "0, 0" : "5, 10"}
           strokeWidth={1}
         />
-      )
+      );
+      return null;
     })
   }
 
@@ -150,7 +151,7 @@ class AbstractChart extends Component {
   }
 
   renderVerticalLines = config => {
-    const {data, width, height, paddingTop, paddingRight} = config
+    const {data, width, height, paddingTop, paddingRight, withoutDashes} = config
     return [...new Array(data.length)].map((_, i) => {
       return (
         <Line
@@ -164,7 +165,7 @@ class AbstractChart extends Component {
           )}
           y2={height - height / 4 + paddingTop}
           stroke={this.props.chartConfig.color(0.2)}
-          strokeDasharray="5, 10"
+          strokeDasharray={withoutDashes ? "0, 0" : "5, 10"}
           strokeWidth={1}
         />
       )

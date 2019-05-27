@@ -223,7 +223,8 @@ class LineChart extends AbstractChart {
       withOuterLines = true,
       style = {},
       decorator,
-      onDataPointClick
+      onDataPointClick,
+      withoutDashes = false,
     } = this.props
     const {labels = []} = data
     const {borderRadius = 0} = style
@@ -253,7 +254,8 @@ class LineChart extends AbstractChart {
                     ...config,
                     count: 4,
                     paddingTop,
-                    paddingRight
+                    paddingRight,
+                    withoutDashes,
                   })
                 : withOuterLines
                 ? this.renderHorizontalLine({
@@ -278,7 +280,8 @@ class LineChart extends AbstractChart {
                     ...config,
                     data: data.datasets[0].data,
                     paddingTop,
-                    paddingRight
+                    paddingRight,
+                    withoutDashes,
                   })
                 : withOuterLines
                 ? this.renderVerticalLine({
